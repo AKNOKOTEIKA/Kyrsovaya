@@ -29,29 +29,29 @@ namespace КУРСОВАЯ_08._05._19
 
 
         }
-
+        //Вывод справки о программе
         private void infoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form3 fm3 = new Form3();
-            fm3.ShowDialog();
+        {                        
+                Help.ShowHelp(this, "file://D:\\Manual\\info.chm");            
         }
 
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-
-        }
-
+        //Считывание данных для формирования базы
         private void button1_Click(object sender, EventArgs e)
         {
-            StreamReader SR = new StreamReader("data.txt");
+            stock[] st = new stock[50];          
+            StreamReader SR = new StreamReader("data1.txt");
+            int i = 0;
             while (SR.EndOfStream == false)
             {
-
                 dataGridView1.Rows.Add(SR.ReadLine(), SR.ReadLine(), SR.ReadLine(), SR.ReadLine(), SR.ReadLine(), SR.ReadLine());
-
-
+                //st[i].name = SR.ReadLine();
+                //st[i].company = SR.ReadLine();
+                //st[i].costforone = Convert.ToInt32(SR.ReadLine());
+                //st[i].number = Convert.ToInt32(SR.ReadLine());
+                //st[i].numberofstock = Convert.ToInt32(SR.ReadLine());
+                //st[i].minpartia = Convert.ToInt32(SR.ReadLine());
+                //dataGridView1.Rows.Add(st[i].name , st[i].company, st[i].costforone , st[i].number, st[i].numberofstock, st[i].minpartia);
+                //i++;
             }
 
 
@@ -79,13 +79,13 @@ namespace КУРСОВАЯ_08._05._19
 
 
 
-            for (int i = 0; i < dataGridView1.RowCount - 1; i++)
+            for (int i = 0; i < dataGridView1.RowCount - 2; i++)
             {
-                SW.WriteLine("________________________________________________________________");
+                SW.WriteLine("______________________________________________________________________");
                 for (int j = 0; j < dataGridView1.ColumnCount; j++)
                 {
 
-                    SW.Write(dataGridView1.Rows[i].Cells[j].Value + "||");
+                    SW.Write(dataGridView1.Rows[i].Cells[j].Value + "|| ");
                 }
                 SW.WriteLine();
 
@@ -124,8 +124,17 @@ namespace КУРСОВАЯ_08._05._19
 
         private void button8_Click(object sender, EventArgs e)
         {
-            int dell = dataGridView1.SelectedCells[0].RowIndex;
-            dataGridView1.Rows.RemoveAt(dell);
+            int dell = 1;
+            if (dataGridView1.SelectedCells[0].RowIndex == 0)
+            {
+
+            }
+            else
+            {
+                dell = dataGridView1.SelectedCells[0].RowIndex;
+                dataGridView1.Rows.RemoveAt(dell);
+            }
+
 
         }
 
@@ -186,9 +195,9 @@ namespace КУРСОВАЯ_08._05._19
                 case0:
                     s = Convert.ToString(dataGridView1.Rows[ChoiseRow].Cells[ChoiseCol].Value);
 
-                    for (int j = 0; j < s.Length - 1; j++)
+                    for (int j = 0; j < s.Length ; j++)
                     {
-                        if (((int)s[j] > 65 && (int)s[j] < 90) || ((int)s[j] > 97 && (int)s[j] < 122))
+                        if ((((int)s[j] >= 65 && (int)s[j] <= 90) || ((int)s[j] >= 97 && (int)s[j] <= 122)) || ((int)s[j] >= 1072 && (int)s[j] <= 1103) || ((int)s[j] >= 1040 && (int)s[j] <= 1071) || (int)s[j] == 32)
                         {
                             label2.Text = "CORRECT";
                         }
@@ -202,7 +211,7 @@ namespace КУРСОВАЯ_08._05._19
                     break;
                 case 1:
                     goto case0;
-                    break;
+                    
                 case 2:
                     s = Convert.ToString(dataGridView1.Rows[ChoiseRow].Cells[ChoiseCol].Value);
 
@@ -240,10 +249,10 @@ namespace КУРСОВАЯ_08._05._19
                     break;
                 case 4:
                     goto caseint;
-                    break;
+                    
                 case 5:
                     goto caseint;
-                    break;
+                    
             }
 
 
@@ -258,7 +267,7 @@ namespace КУРСОВАЯ_08._05._19
 
         private void button6_Click(object sender, EventArgs e)
         {
-
+            stock x = new stock();
             int stock = Convert.ToInt32(textBox2.Text), stockNeed = 0;
             int times = 0;
             textBox3.Text += "Товары со склада (" + stock + ") : " + Environment.NewLine;
@@ -336,6 +345,7 @@ namespace КУРСОВАЯ_08._05._19
                 }
 
                 textBox3.Text += dataGridView1.Rows[i].Cells[0].Value;
+                textBox3.Text += " ~ ";
                 textBox3.Text += dataGridView1.Rows[i].Cells[2].Value;
                 textBox3.Text += Environment.NewLine;
 
@@ -358,7 +368,21 @@ namespace КУРСОВАЯ_08._05._19
         private void button10_Click(object sender, EventArgs e)
         {
 
-            int stock = Convert.ToInt32(textBox2.Text), stockNeed = 0;
+            stock x = new stock();
+            int stock=0, stockNeed = 0;
+            if (x.ChekINT(textBox2.Text) == false)
+            {
+                textBox3.Text += "Введите номер склада коррекстно" + Environment.NewLine;
+                goto skippstock;
+            }
+            else
+            {
+                stock = Convert.ToInt32(textBox2.Text);
+            }
+            
+
+           
+
             int times = 0;
             
 
@@ -403,10 +427,13 @@ namespace КУРСОВАЯ_08._05._19
 
             }
 
-
+        skippstock:;
         }
 
-
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
         private void dataGridView1_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
