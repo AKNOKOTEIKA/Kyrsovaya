@@ -43,15 +43,15 @@ namespace КУРСОВАЯ_08._05._19
             int i = 0;
             while (SR.EndOfStream == false)
             {
-                dataGridView1.Rows.Add(SR.ReadLine(), SR.ReadLine(), SR.ReadLine(), SR.ReadLine(), SR.ReadLine(), SR.ReadLine());
-                //st[i].name = SR.ReadLine();
-                //st[i].company = SR.ReadLine();
-                //st[i].costforone = Convert.ToInt32(SR.ReadLine());
-                //st[i].number = Convert.ToInt32(SR.ReadLine());
-                //st[i].numberofstock = Convert.ToInt32(SR.ReadLine());
-                //st[i].minpartia = Convert.ToInt32(SR.ReadLine());
-                //dataGridView1.Rows.Add(st[i].name , st[i].company, st[i].costforone , st[i].number, st[i].numberofstock, st[i].minpartia);
-                //i++;
+                //dataGridView1.Rows.Add(SR.ReadLine(), SR.ReadLine(), SR.ReadLine(), SR.ReadLine(), SR.ReadLine(), SR.ReadLine());
+                st[i].name = SR.ReadLine();
+                st[i].company = SR.ReadLine();
+                st[i].costforone = Convert.ToInt32(SR.ReadLine());
+                st[i].number = Convert.ToInt32(SR.ReadLine());
+                st[i].numberofstock = Convert.ToInt32(SR.ReadLine());
+                st[i].minpartia = Convert.ToInt32(SR.ReadLine());
+                dataGridView1.Rows.Add(st[i].name, st[i].company, st[i].costforone, st[i].number, st[i].numberofstock, st[i].minpartia);
+                i++;
             }
             SR.Close();
         }
@@ -69,7 +69,6 @@ namespace КУРСОВАЯ_08._05._19
         private void button2_Click(object sender, EventArgs e)
         {
             StreamWriter SW = new StreamWriter("Out.txt");
-            string s = "";
 
 
 
@@ -120,6 +119,7 @@ namespace КУРСОВАЯ_08._05._19
         private void button8_Click(object sender, EventArgs e)
         {
             int dell = 1;
+            label2.Text = "";
             if ((dataGridView1.SelectedCells[0].RowIndex < 0) || (dataGridView1.SelectedCells[0].RowIndex >= dataGridView1.RowCount-1))
             {
                 label2.Text += "EROR!Don`t have this row." + Environment.NewLine;
