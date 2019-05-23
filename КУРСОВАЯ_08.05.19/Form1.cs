@@ -53,12 +53,7 @@ namespace КУРСОВАЯ_08._05._19
                 //dataGridView1.Rows.Add(st[i].name , st[i].company, st[i].costforone , st[i].number, st[i].numberofstock, st[i].minpartia);
                 //i++;
             }
-
-
-
-
             SR.Close();
-
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -125,9 +120,9 @@ namespace КУРСОВАЯ_08._05._19
         private void button8_Click(object sender, EventArgs e)
         {
             int dell = 1;
-            if (dataGridView1.SelectedCells[0].RowIndex == 0)
+            if ((dataGridView1.SelectedCells[0].RowIndex < 0) || (dataGridView1.SelectedCells[0].RowIndex >= dataGridView1.RowCount-1))
             {
-
+                label2.Text += "EROR!Don`t have this row." + Environment.NewLine;
             }
             else
             {
@@ -267,9 +262,24 @@ namespace КУРСОВАЯ_08._05._19
 
         private void button6_Click(object sender, EventArgs e)
         {
-            stock x = new stock();
-            int stock = Convert.ToInt32(textBox2.Text), stockNeed = 0;
             int times = 0;
+            stock x = new stock();
+            int stock = 0, stockNeed = 0;
+            if (x.ChekINT(textBox2.Text) == false)
+            {
+                textBox3.Text += "Введите номер склада коррекстно" + Environment.NewLine;
+                goto skippStock;
+            }
+            else
+            {
+                stock = Convert.ToInt32(textBox2.Text);
+            }
+
+
+
+
+            
+            
             textBox3.Text += "Товары со склада (" + stock + ") : " + Environment.NewLine;
 
             for (int i = 0; i < dataGridView1.RowCount - 1; i++)
@@ -309,7 +319,7 @@ namespace КУРСОВАЯ_08._05._19
             {
                 textBox3.Text += "Отсутствуют!" + Environment.NewLine;
             }
-
+        skippStock:;
 
 
         }
