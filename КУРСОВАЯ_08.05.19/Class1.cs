@@ -111,7 +111,7 @@ namespace КУРСОВАЯ_08._05._19
         {
             int erors = 0;
             
-            for (int j = 0; j < x.Length - 1; j++)
+            for (int j = 0; j < x.Length ; j++)
             {
                 if ((((int)x[j] >= 65 && (int)x[j] <= 90) || ((int)x[j] >= 97 && (int)x[j] <= 122)) || ((int)x[j] >= 1072 && (int)x[j] <= 1103) || ((int)x[j] >= 1040 && (int)x[j] <= 1071) || (int)x[j] == 32)
                 {
@@ -140,7 +140,7 @@ namespace КУРСОВАЯ_08._05._19
         {
             
             int erors = 0;
-            for (int j = 0; j < x.Length - 1; j++)
+            for (int j = 0; j < x.Length; j++)
             {
                 if (((int)x[j] >= 48 && (int)x[j] <= 57) || (int)x[j] == 46)
                 {

@@ -217,63 +217,39 @@ namespace КУРСОВАЯ_08._05._19
 
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-
+            stock x = new stock();
             switch (ChoiseCol)
             {
                 case 0:
                 case0:
                     s = Convert.ToString(dataGridView1.Rows[ChoiseRow].Cells[ChoiseCol].Value);
-
-                    for (int j = 0; j < s.Length ; j++)
+                    if (x.ChekSTR(s) == false)
                     {
-                        if ((((int)s[j] >= 65 && (int)s[j] <= 90) || ((int)s[j] >= 97 && (int)s[j] <= 122)) || ((int)s[j] >= 1072 && (int)s[j] <= 1103) || ((int)s[j] >= 1040 && (int)s[j] <= 1071) || (int)s[j] == 32)
-                        {
-                            label2.Text = "CORRECT";
-                        }
-                        else
-                        {
-                            label2.Text = "EROR.INCORECT VALUE.TRY AGAIN!! ";
-                            label2.Text += "INCORECT VALUE IN: ";
-                            label2.Text += Convert.ToString(dataGridView1.Rows[ChoiseRow].Cells[ChoiseCol].Value);
-                        }
+                        label2.Text = "EROR.INCORECT VALUE.TRY AGAIN!! ";
+                        label2.Text += "INCORECT VALUE IN: ";
+                        label2.Text += Convert.ToString(dataGridView1.Rows[ChoiseRow].Cells[ChoiseCol].Value);
                     }
+                    else {
+                        label2.Text = "CORRECT";
+                    }                    
                     break;
                 case 1:
                     goto case0;
                     
                 case 2:
-                    s = Convert.ToString(dataGridView1.Rows[ChoiseRow].Cells[ChoiseCol].Value);
-
-                    for (int j = 0; j < s.Length - 1; j++)
-                    {
-                        if (((int)s[j] > 48 && (int)s[j] < 57) || (int)s[j] == 46)
-                        {
-                            label2.Text = "CORRECT";
-                        }
-                        else
-                        {
-                            label2.Text = "EROR.INCORECT VALUE.TRY AGAIN!! ";
-                            label2.Text += "INCORECT VALUE IN: ";
-                            label2.Text += Convert.ToString(dataGridView1.Rows[ChoiseRow].Cells[ChoiseCol].Value);
-                        }
-                    }
-                    break;
+                    goto caseint;                  
                 case 3:
                 caseint:
                     s = Convert.ToString(dataGridView1.Rows[ChoiseRow].Cells[ChoiseCol].Value);
-
-                    for (int j = 0; j < s.Length - 1; j++)
+                    if (x.ChekINT(s) == false)
                     {
-                        if (((int)s[j] > 48 && (int)s[j] < 57))
-                        {
-                            label2.Text = "CORRECT";
-                        }
-                        else
-                        {
-                            label2.Text = "EROR.INCORECT VALUE.TRY AGAIN!! ";
-                            label2.Text += "INCORECT VALUE IN: ";
-                            label2.Text += Convert.ToString(dataGridView1.Rows[ChoiseRow].Cells[ChoiseCol].Value);
-                        }
+                        label2.Text = "EROR.INCORECT VALUE.TRY AGAIN!! ";
+                        label2.Text += "INCORECT VALUE IN: ";
+                        label2.Text += Convert.ToString(dataGridView1.Rows[ChoiseRow].Cells[ChoiseCol].Value);
+                    }
+                    else
+                    {
+                        label2.Text = "CORRECT";
                     }
                     break;
                 case 4:
@@ -316,23 +292,16 @@ namespace КУРСОВАЯ_08._05._19
             for (int i = 0; i < dataGridView1.RowCount - 1; i++)
             {
                 s = Convert.ToString(dataGridView1.Rows[i].Cells[4].Value);
-                
-                for (int j = 0; j < s.Length - 1; j++)
+                if (x.ChekINT(s) == false)
                 {
-                    if (((int)s[j] > 48 && (int)s[j] < 57))
-                    {
-                        label2.Text = "CORRECT";
-                    }
-                    else
-                    {
-                        label2.Text = "EROR.INCORECT VALUE.TRY AGAIN!! ";
-                        label2.Text += "INCORECT VALUE IN: ";
-                        label2.Text += Convert.ToString(dataGridView1.Rows[i].Cells[4].Value) + "(" + i + ",5)";
-                        goto skipp;
-                       
-                    }
-                }
-
+                    label2.Text = "EROR.INCORECT VALUE.TRY AGAIN!! ";
+                    label2.Text += "INCORECT VALUE IN: ";
+                    label2.Text += Convert.ToString(dataGridView1.Rows[i].Cells[4].Value) + "(" + i + ",5)";
+                    goto skipp;
+                }else
+                {
+                    label2.Text = "CORRECT";
+                }            
                 stockNeed = Convert.ToInt32(dataGridView1.Rows[i].Cells[4].Value);
                 if (stock == stockNeed)
                 {
@@ -343,14 +312,14 @@ namespace КУРСОВАЯ_08._05._19
                     textBox3.Text += Environment.NewLine;
                     times++;
                 }
-
+            skipp:;
             }
-        skipp:;
+            
             if (times == 0)
             {
                 textBox3.Text += "Отсутствуют!" + Environment.NewLine;
             }
-        skippStock:;
+            skippStock:;
 
 
         }
