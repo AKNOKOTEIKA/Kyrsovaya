@@ -47,8 +47,7 @@ namespace КУРСОВАЯ_08._05._19
                 StreamReader SR = new StreamReader(openFileDialog1.FileName);
                 int i = 0;
                 while (SR.EndOfStream == false)
-                {
-                    //dataGridView1.Rows.Add(SR.ReadLine(), SR.ReadLine(), SR.ReadLine(), SR.ReadLine(), SR.ReadLine(), SR.ReadLine());
+                {                 
                     st[i].name = SR.ReadLine();
                     st[i].company = SR.ReadLine();
                     st[i].costforone = Convert.ToInt32(SR.ReadLine());
